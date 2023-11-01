@@ -21,7 +21,6 @@ export const AppContextProvider = ({ children }) => {
       setClient(res.data);
     } catch (error) {
       setErrors(error.response.data.errors)
-      console.log(error.response.data.errors);
     }
   };
   return (
