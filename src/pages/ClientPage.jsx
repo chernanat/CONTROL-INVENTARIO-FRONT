@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useApp } from "../context/AppContext";
 import { useEffect, useState } from "react";
+import { Toaster, toast } from "sonner";
 // import Swal from 'sweetalert2'
 
 const ClientPage = () => {
@@ -12,8 +13,13 @@ const ClientPage = () => {
     registerClient(values);
   });
 
-  const handleError = (errors) => {
+  const handleError = async (errors) => {
     if (errors) {
+      await errors.forEach((error) => {
+        toast.error('Ops! Algo ha ido Mal!', {
+          description: `${error.msg}`
+        });
+      });
       setHideError(true);
       setTimeout(() => {
         setHideError(false);
@@ -50,6 +56,7 @@ const ClientPage = () => {
           </div>
         )}
       </div>
+      <Toaster></Toaster>
     </div>
   );
 };
