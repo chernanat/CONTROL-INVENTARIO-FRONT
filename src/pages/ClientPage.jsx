@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useApp } from "../context/AppContext";
+import { useClient } from "../context/ClientContext";
 import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import Swal from "sweetalert2";
@@ -16,7 +16,7 @@ const ClientPage = () => {
     clients,
     deleteClient,
     upgradeClient,
-  } = useApp();
+  } = useClient();
   const { register, handleSubmit } = useForm();
   const [hideError, setHideError] = useState(false);
 

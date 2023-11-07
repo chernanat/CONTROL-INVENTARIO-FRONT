@@ -1,20 +1,30 @@
-import { useState } from "react";
+//client
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ClientPage from "./pages/ClientPage";
-import { AppContextProvider } from "./context/AppContext";
-("./context/AppContext");
+import { ClientContextProvider } from "./context/ClientContext";
+import { ProductContextProvider } from "./context/ProductContext";
+import { ProductPage } from "./pages/ProductPage";
+import { SaleContextProvider } from "./context/SaleContext";
+import { SalePage } from "./pages/SalePage";
 
 function App() {
   return (
-    <AppContextProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/client" element={<ClientPage></ClientPage>}></Route>
-          <Route path="/product"></Route>
-          <Route path="/sale"></Route>
-        </Routes>
-      </BrowserRouter>
-    </AppContextProvider>
+    <ClientContextProvider>
+      <ProductContextProvider>
+        <SaleContextProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/client" element={<ClientPage></ClientPage>}></Route>
+              <Route
+                path="/product"
+                element={<ProductPage></ProductPage>}
+              ></Route>
+              <Route path="/sale" element={<SalePage></SalePage>}></Route>
+            </Routes>
+          </BrowserRouter>
+        </SaleContextProvider>
+      </ProductContextProvider>
+    </ClientContextProvider>
   );
 }
 

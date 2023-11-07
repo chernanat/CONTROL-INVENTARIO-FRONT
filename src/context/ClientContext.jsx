@@ -7,17 +7,17 @@ import {
   updateClient,
 } from "../services/client";
 
-const AppContext = createContext();
+const ClientContext = createContext();
 
-export const useApp = () => {
-  const context = useContext(AppContext);
+export const useClient = () => {
+  const context = useContext(ClientContext);
   if (!context) {
-    throw new Error("useApp debe ser usado dentro de un AppContextProvider");
+    throw new Error("useClient debe ser usado dentro de un AppContextProvider");
   }
   return context;
 };
 
-export const AppContextProvider = ({ children }) => {
+export const ClientContextProvider = ({ children }) => {
   const [client, setClient] = useState({});
   const [errors, setErrors] = useState([]);
   const [success, setSuccess] = useState(false);
@@ -31,6 +31,7 @@ export const AppContextProvider = ({ children }) => {
       setErrors([]);
       setSuccess(true);
     } catch (error) {
+      console.log(error.response.data);
       setErrors(error.response.data.errors);
     }
   };
@@ -84,7 +85,7 @@ export const AppContextProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider
+    <ClientContext.Provider
       value={{
         registerClient,
         client,
@@ -98,6 +99,6 @@ export const AppContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </AppContext.Provider>
+    </ClientContext.Provider>
   );
 };

@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const URL = "http://localhost:3000/api";
+import { URL } from './axios'
 
 export const registerRequest = (user) => axios.post(`${URL}/createclient`, user);
 export const getClients = () => axios.get(`${URL}/getclients`);
