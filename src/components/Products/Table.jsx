@@ -37,7 +37,7 @@ const Table = ({
   }, [product, errors]);
   return (
     <>
-      <table>
+      <table className="table-auto">
         <thead>
           <tr>
             <th>Id</th>

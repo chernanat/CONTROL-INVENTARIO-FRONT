@@ -1,5 +1,12 @@
 import React, { createContext, useContext, useState } from "react";
-import { delSale, getSale, getSales, saleRequest, salesWithclientProduct, updateSale } from "../services/sale";
+import {
+  delSale,
+  getSale,
+  getSales,
+  saleRequest,
+  salesWithclientProduct,
+  updateSale,
+} from "../services/sale";
 
 const SaleContext = createContext();
 
@@ -28,8 +35,16 @@ export const SaleContextProvider = ({ children }) => {
       setErrors([]);
       setSucess(true);
     } catch (error) {
-      console.log(error.response.data);
-      setErrors(error.response.data.errors);
+      if (error.response.data.errors) {
+        setErrors(error.response.data.errors);
+      } else if (
+        Array.isArray(error.response.data) &&
+        error.response.data.length > 0
+      ) {
+        setErrors([error.response.data]);
+      } else {
+        console.error("Error inesperado:", error.response);
+      }
     }
   };
 
@@ -88,17 +103,23 @@ export const SaleContextProvider = ({ children }) => {
       setErrors(error);
     }
   };
-  return <SaleContext.Provider value={{
-    registerSale,
-    listSales,
-    listSale,
-    upgradeSale,
-    deleteSale,
-    listSalesAssociations,
-    errors, 
-    success,
-    sale,
-    sales,
-    saleproductclient
-  }}>{children}</SaleContext.Provider>;
+  return (
+    <SaleContext.Provider
+      value={{
+        registerSale,
+        listSales,
+        listSale,
+        upgradeSale,
+        deleteSale,
+        listSalesAssociations,
+        errors,
+        success,
+        sale,
+        sales,
+        saleproductclient,
+      }}
+    >
+      {children}
+    </SaleContext.Provider>
+  );
 };

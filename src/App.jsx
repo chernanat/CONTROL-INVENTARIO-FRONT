@@ -6,6 +6,7 @@ import { ProductContextProvider } from "./context/ProductContext";
 import { ProductPage } from "./pages/ProductPage";
 import { SaleContextProvider } from "./context/SaleContext";
 import { SalePage } from "./pages/SalePage";
+import { Navbar } from "./components/Navbar";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <ProductContextProvider>
         <SaleContextProvider>
           <BrowserRouter>
+            <Navbar></Navbar>
             <Routes>
               <Route path="/client" element={<ClientPage></ClientPage>}></Route>
               <Route

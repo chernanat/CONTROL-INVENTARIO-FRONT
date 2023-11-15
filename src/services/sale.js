@@ -9,4 +9,4 @@ export const delSale = (id) => axios.delete(`${URL}/deletesale/${id}`);
 
 //consultas(relaciones) de ventas por cliente y consulta de ventas por producto
 
-export const salesWithclientProduct = () => axios.get(`${URL}/sales2`);
+export const salesWithclientProduct = () => axios.get(`${URL}/salesclientproduct`);
