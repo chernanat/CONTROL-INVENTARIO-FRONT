@@ -23,7 +23,7 @@ const ClientPage = () => {
 
   const onSubmit = handleSubmit((values) => {
     registerClient(values);
-    reset();
+    // reset();
   });
 
   const handleSuccess = () => {

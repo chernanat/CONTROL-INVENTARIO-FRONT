@@ -40,6 +40,7 @@ export const ClientContextProvider = ({ children }) => {
     try {
       const clients = await getClients();
       setClients(clients.data);
+      setSuccess(false);
     } catch (error) {
       console.log(error);
       // setErrors(error);
@@ -50,6 +51,7 @@ export const ClientContextProvider = ({ children }) => {
     try {
       const client = await getClient(id);
       setClient(client.data);
+      setSuccess(false);
       console.log(client.data);
     } catch (error) {
       console.log(error);
@@ -61,7 +63,7 @@ export const ClientContextProvider = ({ children }) => {
     try {
       const upgradedClient = await updateClient(id, client);
       console.log(upgradedClient.data);
-      setClient(upgradedClient.data)
+      setClient(upgradedClient.data);
       setErrors([]);
       setSuccess(true);
       listClients();

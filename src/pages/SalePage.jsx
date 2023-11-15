@@ -30,8 +30,9 @@ export const SalePage = () => {
 
   const onSubmit = handleSubmit((values) => {
     registerSale(values);
-    reset()
+    reset();
   });
+
   const handleSuccess = () => {
     if (errors.length === 0 && success) {
       Swal.fire(`${sale.message}!`, "Transaccion con Exito!", "success");
@@ -80,7 +81,14 @@ export const SalePage = () => {
             className="bg-gray-100 shadow-md rounded px-4 py-4 mb-6 max-w-md mx-auto"
           >
             {clients.length === 0 || products.length === 0 ? (
-              <h3 className="text-red text-xl font-bold">debe crear un cliente y un producto primero</h3>
+              <div role="alert">
+                <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                  Advertencia
+                </div>
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  <p>Debe Crear un Cliente y Un Producto Primero.</p>
+                </div>
+              </div>
             ) : (
               <div className="m-6">
                 <h1 className="text-black font-bold text-3xl">Crear Venta</h1>
@@ -126,13 +134,13 @@ export const SalePage = () => {
                     className="mt-2 rounded w-full bg-gray-200 border py-1"
                   />
                 </div>
+                <div className="flex justify-center">
+                  <button className="rounded bg-green-600 font-bold py-2 px-4 text-white hover:bg-green-700">
+                    Crear Venta!
+                  </button>
+                </div>
               </div>
             )}
-            <div className="flex justify-center">
-              <button className="rounded bg-green-600 font-bold py-2 px-4 text-white hover:bg-green-700">
-                Crear Venta!
-              </button>
-            </div>
           </form>
         )}
 

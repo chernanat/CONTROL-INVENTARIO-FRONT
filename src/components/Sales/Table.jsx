@@ -8,7 +8,6 @@ const Table = ({
   saleproductclient,
   setCancel,
 }) => {
-  console.log(saleproductclient);
   const handleDelete = async (id) => {
     await deleteSale(id);
     setCancel(false);

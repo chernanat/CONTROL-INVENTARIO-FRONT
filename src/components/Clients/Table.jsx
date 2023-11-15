@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
 
 const Table = ({
   clients,
@@ -10,8 +9,6 @@ const Table = ({
   errors,
   setCancel,
 }) => {
-  const { setValue } = useForm();
-
   const handleDelete = async (id) => {
     await deleteClient(id);
     setCancel(false);
@@ -32,7 +29,7 @@ const Table = ({
   useEffect(() => {
     // setValue("nombre", client.nombre);
     // setValue("apellido", client.apellido);
-  }, [client, errors]);
+  }, [ errors]);
   return (
     <div className="relative overflow-x-auto rounded">
       <table className="w-full text-sm text-left rtl:text-right text-white-500 dark:text-gray-400">
@@ -73,26 +70,6 @@ const Table = ({
           ))}
         </tbody>
       </table>
-      {/* {cancel && (
-        <div>
-          <h2>Formulario Actualizacion</h2>
-          <form onSubmit={onUpdateSubmit}>
-            <div>
-              <label>Ingrese Nombre del Cliente:</label>
-              <input type="text" {...register("nombre", { required: false })} />
-            </div>
-            <div>
-              <label>Ingrese el apellido:</label>
-              <input
-                type="text"
-                {...register("apellido", { required: false })}
-              />
-            </div>
-            <button type="submit">Actualizar</button>
-            <button onClick={onCancel}>Cancel</button>
-          </form>
-        </div>
-      )} */}
     </div>
   );
 };

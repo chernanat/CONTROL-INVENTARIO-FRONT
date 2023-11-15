@@ -33,8 +33,16 @@ export const ProductContextProvider = ({ children }) => {
       setErrors([]);
       setSucess(true);
     } catch (error) {
-      console.log(error.response.data);
-      setErrors(error.response.data.errors);
+      if (error.response.data.errors) {
+        setErrors(error.response.data.errors);
+      } else if (
+        Array.isArray(error.response.data) &&
+        error.response.data.length > 0
+      ) {
+        setErrors([error.response.data]);
+      } else {
+        console.error("Error inesperado:", error.response);
+      }
     }
   };
 
