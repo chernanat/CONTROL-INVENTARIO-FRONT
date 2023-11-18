@@ -1,6 +1,11 @@
 import React from "react";
 
 const TableHistorial = ({ saleclient }) => {
+  const total = saleclient.reduce(
+    (acumulador, venta) => acumulador + venta.producto.precio * venta.cantidad,
+    0
+  );
+
   return (
     <div className="relative overflow-x-auto rounded-md">
       <h1 className="text-black text-3xl font-bold flex justify-center">
@@ -44,6 +49,15 @@ const TableHistorial = ({ saleclient }) => {
           ))}
         </tbody>
       </table>
+      <h1 className="text-black text-2xl font-bold flex justify-start">
+        Total comprado: {''}
+          {Intl.NumberFormat("es-CO", {
+          style: "currency",
+          currency: "COP",
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        }).format(total)}
+      </h1>
     </div>
   );
 };

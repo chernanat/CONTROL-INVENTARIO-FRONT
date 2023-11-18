@@ -52,10 +52,6 @@ const ClientPage = () => {
     setCancel(false);
   });
 
-  const onShowHistorial = async (id) => {
-    await salesWithClient(id);
-  };
-
   const onCancel = () => {
     setCancel(false);
     reset();
@@ -134,14 +130,16 @@ const ClientPage = () => {
               </div>
             </div>
             <div className="py-2 p-2 mb-6">
-              <label className="block font-bold text-black text-2xl">
-                Apellido del Cliente:
-              </label>
-              <input
-                type="text"
-                {...register("apellido", { required: false })}
-                className="mt-2 rounded w-full bg-gray-200 border py-1"
-              />
+              <div className="px-6">
+                <label className="block font-bold text-black text-2xl">
+                  Apellido del Cliente:
+                </label>
+                <input
+                  type="text"
+                  {...register("apellido", { required: false })}
+                  className="mt-2 rounded w-full bg-gray-200 border py-1"
+                />
+              </div>
             </div>
             <div className="flex justify-center space-x-2">
               <button

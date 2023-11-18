@@ -82,13 +82,13 @@ const Table = ({
                   Eliminar
                 </button>
                 <button
-                  className="text-white px-2 py-2 rounded bg-indigo-800 hover:bg-indigo-700"
+                  className="text-white px-2 py-2 rounded bg-emerald-600 hover:bg-indigo-700"
                   onClick={() => {
                     handleHistorial(sale.cliente.id);
                     setCancel(false);
                   }}
                 >
-                  Ventas a {sale.cliente.nombre}
+                  Historial de {sale.cliente.nombre}
                 </button>
               </td>
             </tr>

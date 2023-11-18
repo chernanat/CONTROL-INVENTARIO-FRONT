@@ -73,7 +73,7 @@ export const ProductPage = () => {
         {!cancel && (
           <form
             onSubmit={onSubmit}
-            className="bg-gray-100 shadow-md rounded px-10 py-4 mb-6 max-w-md mx-auto"
+            className="bg-gray-100 shadow-md rounded px-16 py-4 mb-6 max-w-md mx-auto"
           >
             <h1 className="text-black font-bold text-3xl mb-4 mt-4 px-2">
               Crear Producto
