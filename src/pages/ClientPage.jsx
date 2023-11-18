@@ -23,7 +23,7 @@ const ClientPage = () => {
 
   const onSubmit = handleSubmit((values) => {
     registerClient(values);
-    // reset();
+    reset();
   });
 
   const handleSuccess = () => {
@@ -52,6 +52,10 @@ const ClientPage = () => {
     setCancel(false);
   });
 
+  const onShowHistorial = async (id) => {
+    await salesWithClient(id);
+  };
+
   const onCancel = () => {
     setCancel(false);
     reset();
@@ -66,44 +70,44 @@ const ClientPage = () => {
   }, [client, errors]);
 
   return (
-    <div className="container mx-auto flex justify-center items-center flex-col">
+    <div className="container mx-auto justify-center items-center">
       <h1 className="text-4xl p-2 font-bold text-center">Pagina del Cliente</h1>
-      <div>
+      <div className="mt-2">
         {!cancel && (
           <form
             onSubmit={onSubmit}
-            className="bg-gray-100 shadow-md rounded px-4 py-4 mb-6 max-w-md mx-auto"
+            className="bg-gray-100 shadow-md rounded px-5 py-4 mb-6 max-w-md mx-auto"
           >
-            <div className="m-6">
-              <h1 className="text-black font-bold text-3xl">Crear Cliente</h1>
-              <div className="py-2 p-2">
-                <label className="block font-bold text-black text-2xl">
-                  Nombre del Cliente:
-                </label>
-                <input
-                  className="mt-2 rounded w-full bg-gray-200 border py-1"
-                  type="text"
-                  {...register("nombre", { required: false })}
-                />
-              </div>
-              <div className="py-2 p-2 mb-6">
-                <label className="block font-bold text-black text-2xl">
-                  Apellido del Cliente:
-                </label>
-                <input
-                  className="mt-2 rounded w-full bg-gray-200 border py-1"
-                  type="text"
-                  {...register("apellido", { required: false })}
-                />
-              </div>
-              <div className="flex justify-center">
-                <button
-                  className="rounded bg-green-600 font-bold py-2 px-4 text-white hover:bg-green-700"
-                  type="submit"
-                >
-                  Registrar
-                </button>
-              </div>
+            <h1 className="text-black font-bold text-3xl mt-4 px-3">
+              Crear Cliente
+            </h1>
+            <div className="py-2 p-2 mt-5">
+              <label className="block font-bold text-black text-2xl">
+                Nombre del Cliente:
+              </label>
+              <input
+                className="mt-2 rounded w-full bg-gray-200 border py-1"
+                type="text"
+                {...register("nombre", { required: false })}
+              />
+            </div>
+            <div className="py-2 px-2">
+              <label className="block font-bold text-black text-2xl">
+                Apellido del Cliente:
+              </label>
+              <input
+                className="mt-2 rounded w-full bg-gray-200 border py-1"
+                type="text"
+                {...register("apellido", { required: false })}
+              />
+            </div>
+            <div className="flex justify-center">
+              <button
+                className="rounded bg-green-600 font-bold py-2 px-4 text-white hover:bg-green-700"
+                type="submit"
+              >
+                Registrar
+              </button>
             </div>
           </form>
         )}
@@ -139,7 +143,7 @@ const ClientPage = () => {
                 className="mt-2 rounded w-full bg-gray-200 border py-1"
               />
             </div>
-            <div className="flex justify-center space-x-2 mt-4">
+            <div className="flex justify-center space-x-2">
               <button
                 className="rounded bg-blue-600 px-2 py-2 hover:bg-blue-700 text-white font-bold"
                 type="submit"

@@ -50,6 +50,7 @@ export const ProductContextProvider = ({ children }) => {
     try {
       const products = await getProducts();
       setProducts(products.data);
+      setSucess(false);
     } catch (error) {
       console.log(error.response.data);
     }
@@ -60,6 +61,7 @@ export const ProductContextProvider = ({ children }) => {
       const product = await getProduct(id);
       console.log(product.data);
       setProduct(product.data);
+      // setSucess(false);
     } catch (error) {
       console.log(error);
       setErrors(error.response.data.errors);

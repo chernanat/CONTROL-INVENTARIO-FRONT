@@ -6,12 +6,9 @@ const Table = ({
   deleteProduct,
   listProduct,
   product,
-  upgradeProduct,
   errors,
+  setCancel,
 }) => {
-  const { register, handleSubmit, setValue } = useForm();
-
-  const [cancel, setCancel] = useState(false);
   const handleDelete = async (id) => {
     await deleteProduct(id);
     setCancel(false);
@@ -20,96 +17,73 @@ const Table = ({
     await listProduct(id);
   };
 
-  const onUpdateSubmit = handleSubmit((values) => {
-    upgradeProduct(product.id, values);
-    setCancel(false);
-  });
-
-  const onCancel = () => {
-    setCancel(false);
-  };
-
-  useEffect(() => {
-    setValue("id", product.id);
-    setValue("nombre", product.nombre);
-    setValue("precio", product.precio);
-    setValue("cantidad", product.cantidad);
-  }, [product, errors]);
+  useEffect(() => {}, [product, errors]);
   return (
-    <>
-      <table className="table-auto">
-        <thead>
+    <div className="relative overflow-x-auto rounded">
+      <table className="w-full text-sm text-left rtl:text-right text-white-500 dark:text-gray-400">
+        <thead className="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th>Id</th>
-            <th>Nombre Producto</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Operation</th>
+            <th className="px-6 py-2">Id</th>
+            <th className="px-6 py-2">Nombre Producto</th>
+            <th className="px-6 py-2">Precio</th>
+            <th className="px-6 py-2">Cantidad</th>
+            <th className="px-6 py-2">Stock</th>
+            <th className="px-6 py-2 text-center">Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="odd:bg-white odd:dark:bg-gray-900 even:dark:bg-gray-800 border-b dark:border-gray-800">
           {products.map((product, index) => (
             <tr key={index}>
-              <td>{product.id}</td>
-              <td>{product.nombre}</td>
-              <td>{product.precio}</td>
-              <td>{product.cantidad}</td>
-              <td>
+              <td className="px-6 py-2">{product.id}</td>
+              <td className="px-6 py-2">{product.nombre}</td>
+              <td className="px-6 py-2">
+                {Intl.NumberFormat("es-CO", {
+                  style: "currency",
+                  currency: "COP",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }).format(product.precio)}
+              </td>
+              <td className="px-6 py-2">{product.cantidad}</td>
+              <td
+                className={
+                  product.cantidad === 0
+                    ? "bg-red-500 px-30 py-1 rounded-3xl text-white uppercase font-bold text-center"
+                    : product.cantidad < 5
+                    ? "bg-yellow-500 px-2 py-1 rounded-3xl text-white uppercase font-bold text-center"
+                    : "bg-green-500 px-2 py-1 rounded-3xl text-white uppercase font-bold text-center"
+                }
+              >
+                {product.cantidad === 0
+                  ? "Sin Stock"
+                  : product.cantidad < 5
+                  ? "Bajo"
+                  : "Alto"}
+              </td>
+              <td className="px-6 py-2 space-x-2">
                 <button
+                  className="text-white px-2 py-2 rounded bg-blue-800 hover:bg-blue-700"
                   onClick={() => {
                     handleUpdateProduct(product.id);
                     setCancel(true);
                   }}
                 >
-                  Update
+                  Actualizar
                 </button>
                 <button
+                  className="text-white px-2 py-2 rounded bg-red-800 hover:bg-red-700"
                   onClick={() => {
                     handleDelete(product.id);
                   }}
                 >
-                  Delete
+                  Eliminar
                 </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      {cancel && (
-        <div>
-          <h2>Formulario Actualizacion</h2>
-          <form onSubmit={onUpdateSubmit}>
-            <div>
-              <label>Ingrese id del Producto:</label>
-              <input type="number" {...register("id", { required: false })} />
-            </div>
-            <div>
-              <label>Ingrese el Nombre del Producto:</label>
-              <input
-                type="text"
-                {...register("nombre", { required: false })}
-              />
-            </div>
-            <div>
-              <label>Ingrese el Precio:</label>
-              <input
-                type="number"
-                {...register("precio", { required: false })}
-              />
-            </div>
-            <div>
-              <label>Ingrese la Cantidad:</label>
-              <input
-                type="number"
-                {...register("cantidad", { required: false })}
-              />
-            </div>
-            <button type="submit">Actualizar</button>
-            <button onClick={onCancel}>Cancel</button>
-          </form>
-        </div>
-      )}
-    </>
+    </div>
   );
 };
 

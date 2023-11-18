@@ -5,6 +5,7 @@ import {
   getSales,
   saleRequest,
   salesWithclientProduct,
+  salesWithClient,
   updateSale,
 } from "../services/sale";
 
@@ -26,22 +27,32 @@ export const SaleContextProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [success, setSucess] = useState(false);
   const [saleproductclient, setSaleProductClient] = useState([]);
+  const [saleclient, setSaleClient] = useState([]);
 
   const registerSale = async (sale) => {
     try {
       const newSale = await saleRequest(sale);
-      console.log(newSale.data);
+      // console.log(newSale.data);
       setSale(newSale.data);
       setErrors([]);
       setSucess(true);
+      setTimeout(() => {
+        setSucess(false);
+      }, 5000);
     } catch (error) {
       if (error.response.data.errors) {
         setErrors(error.response.data.errors);
+        setTimeout(() => {
+          setErrors([]);
+        }, 5000);
       } else if (
         Array.isArray(error.response.data) &&
         error.response.data.length > 0
       ) {
         setErrors([error.response.data]);
+        setTimeout(() => {
+          setErrors([]);
+        }, 5000);
       } else {
         console.error("Error inesperado:", error.response);
       }
@@ -73,7 +84,26 @@ export const SaleContextProvider = ({ children }) => {
       setSale(sale.data);
     } catch (error) {
       console.log(error);
-      setErrors(error.response.data.errors);
+      // setErrors(error.response.data.errors);
+    }
+  };
+
+  const listSaleWithClient = async (id) => {
+    try {
+      const saleclient = await salesWithClient(id);
+      // console.log(saleclient.data);
+      setSaleClient(saleclient.data);
+    } catch (error) {
+      if (error.response.data.errors) {
+        setErrors(error.response.data.errors);
+      } else if (
+        Array.isArray(error.response.data) &&
+        error.response.data.length > 0
+      ) {
+        setErrors([error.response.data]);
+      } else {
+        console.error("Error inesperado:", error.response);
+      }
     }
   };
 
@@ -98,6 +128,9 @@ export const SaleContextProvider = ({ children }) => {
       setErrors([]);
       setSucess(true);
       setSale(sale.data);
+      setTimeout(() => {
+        setErrors(false);
+      }, 5000);
     } catch (error) {
       console.log(error);
       setErrors(error);
@@ -112,11 +145,13 @@ export const SaleContextProvider = ({ children }) => {
         upgradeSale,
         deleteSale,
         listSalesAssociations,
+        listSaleWithClient,
         errors,
         success,
         sale,
         sales,
         saleproductclient,
+        saleclient,
       }}
     >
       {children}
