@@ -69,7 +69,6 @@ export const SalePage = () => {
     setCancel(false);
     reset();
   };
-  console.log(errors);
   useEffect(() => {
     listSalesAssociations();
     listSales();

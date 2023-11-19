@@ -32,19 +32,19 @@ export const SaleContextProvider = ({ children }) => {
   const registerSale = async (sale) => {
     try {
       const newSale = await saleRequest(sale);
-      // console.log(newSale.data);
+      console.log('holas');
       setSale(newSale.data);
       setErrors([]);
       setSucess(true);
       setTimeout(() => {
         setSucess(false);
-      }, 5000);
+      }, 2000);
     } catch (error) {
       if (error.response.data.errors) {
         setErrors(error.response.data.errors);
         setTimeout(() => {
           setErrors([]);
-        }, 5000);
+        }, 2000);
       } else if (
         Array.isArray(error.response.data) &&
         error.response.data.length > 0
@@ -52,7 +52,7 @@ export const SaleContextProvider = ({ children }) => {
         setErrors([error.response.data]);
         setTimeout(() => {
           setErrors([]);
-        }, 5000);
+        }, 2000);
       } else {
         console.error("Error inesperado:", error.response);
       }
@@ -80,7 +80,7 @@ export const SaleContextProvider = ({ children }) => {
   const listSale = async (id) => {
     try {
       const sale = await getSale(id);
-      console.log(sale.data);
+      // console.log(sale.data);
       setSale(sale.data);
     } catch (error) {
       console.log(error);
@@ -129,8 +129,8 @@ export const SaleContextProvider = ({ children }) => {
       setSucess(true);
       setSale(sale.data);
       setTimeout(() => {
-        setErrors(false);
-      }, 5000);
+        setSucess(false);
+      }, 3000);
     } catch (error) {
       console.log(error);
       setErrors(error);

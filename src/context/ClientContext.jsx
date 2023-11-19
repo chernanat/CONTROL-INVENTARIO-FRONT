@@ -33,6 +33,9 @@ export const ClientContextProvider = ({ children }) => {
     } catch (error) {
       console.log(error.response.data);
       setErrors(error.response.data.errors);
+      setTimeout(() => {
+        setErrors([]);
+      }, 3000);
     }
   };
 

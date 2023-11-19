@@ -62,7 +62,7 @@ const Table = ({
               </td>
               <td className="px-6 py-2 space-x-2">
                 <button
-                  className="text-white px-2 py-2 rounded bg-blue-800 hover:bg-blue-700"
+                  className="text-white px-2 py-2 rounded bg-blue-800 hover:bg-blue-700 font-bold"
                   onClick={() => {
                     handleUpdateProduct(product.id);
                     setCancel(true);
@@ -71,7 +71,7 @@ const Table = ({
                   Actualizar
                 </button>
                 <button
-                  className="text-white px-2 py-2 rounded bg-red-800 hover:bg-red-700"
+                  className="text-white px-2 py-2 rounded bg-red-800 hover:bg-red-700 font-bold"
                   onClick={() => {
                     handleDelete(product.id);
                   }}

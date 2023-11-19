@@ -66,7 +66,7 @@ const Table = ({
               </td>
               <td className="px-6 py-4 space-x-2">
                 <button
-                  className="text-white px-2 py-2 rounded bg-blue-800 hover:bg-blue-700"
+                  className="text-white px-2 py-2 rounded bg-blue-800 hover:bg-blue-700 font-bold"
                   onClick={() => {
                     handleUpdateSale(sale.id);
                   }}
@@ -74,7 +74,7 @@ const Table = ({
                   Actualizar
                 </button>
                 <button
-                  className="text-white px-2 py-2 rounded bg-red-800 hover:bg-red-700"
+                  className="text-white px-2 py-2 rounded bg-red-800 hover:bg-red-700 font-bold"
                   onClick={() => {
                     handleDelete(sale.id);
                   }}
@@ -82,7 +82,7 @@ const Table = ({
                   Eliminar
                 </button>
                 <button
-                  className="text-white px-2 py-2 rounded bg-emerald-600 hover:bg-indigo-700"
+                  className="text-white px-2 py-2 rounded bg-emerald-600 hover:bg-indigo-700 font-bold"
                   onClick={() => {
                     handleHistorial(sale.cliente.id);
                     setCancel(false);

@@ -35,11 +35,17 @@ export const ProductContextProvider = ({ children }) => {
     } catch (error) {
       if (error.response.data.errors) {
         setErrors(error.response.data.errors);
+        setTimeout(() => {
+          setErrors([]);
+        }, 2000);
       } else if (
         Array.isArray(error.response.data) &&
         error.response.data.length > 0
       ) {
         setErrors([error.response.data]);
+        setTimeout(() => {
+          setErrors([]);
+        }, 3000);
       } else {
         console.error("Error inesperado:", error.response);
       }
@@ -79,6 +85,9 @@ export const ProductContextProvider = ({ children }) => {
     } catch (error) {
       console.log(error.response.data);
       setErrors(error.response.data.errors);
+      setTimeout(() => {
+        setErrors([]);
+      }, 2000);
     }
   };
 
@@ -92,6 +101,9 @@ export const ProductContextProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
       setErrors(error);
+      setTimeout(() => {
+        setErrors([]);
+      }, 3000);
     }
   };
   return (
