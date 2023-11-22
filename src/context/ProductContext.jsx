@@ -5,6 +5,8 @@ import {
   updateProduct,
   delProduct,
   getProduct,
+  decrement,
+  increment,
 } from "../services/product";
 
 const ProductContext = createContext();
@@ -106,6 +108,38 @@ export const ProductContextProvider = ({ children }) => {
       }, 3000);
     }
   };
+
+  const incrementProduct = async (id) => {
+    try {
+      const product = await increment(id);
+      listProducts();
+      setErrors([]);
+      setSucess(true);
+      setProduct(product.data);
+    } catch (error) {
+      console.log(error);
+      setErrors(error);
+      setTimeout(() => {
+        setErrors([]);
+      }, 3000);
+    }
+  };
+
+  const decrementProduct = async (id) => {
+    try {
+      const product = await decrement(id);
+      listProducts();
+      setErrors([]);
+      setSucess(true);
+      setProduct(product.data);
+    } catch (error) {
+      console.log(error);
+      setErrors(error);
+      setTimeout(() => {
+        setErrors([]);
+      }, 3000);
+    }
+  };
   return (
     <ProductContext.Provider
       value={{
@@ -118,6 +152,8 @@ export const ProductContextProvider = ({ children }) => {
         errors,
         deleteProduct,
         upgradeProduct,
+        incrementProduct,
+        decrementProduct
       }}
     >
       {children}

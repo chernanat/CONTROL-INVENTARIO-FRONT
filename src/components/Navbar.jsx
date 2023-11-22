@@ -8,6 +8,11 @@ export const Navbar = () => {
         <div className="flex items-center justify-between md:p-5">
           <ul className="flex flex-col md:flex-row">
             <li>
+              <Link to="/" className="nav-link">
+                Home
+              </Link>
+            </li>
+            <li>
               <Link to="/product" className="nav-link">
                 Productos
               </Link>

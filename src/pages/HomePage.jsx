@@ -1,20 +1,53 @@
 import React, { useEffect } from "react";
 import { useProduct } from "../context/ProductContext";
 import reactImage from "../assets/react.svg";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 const HomePage = () => {
-  const { products, listProducts } = useProduct();
-  console.log(products);
+  const { products, listProducts, incrementProduct, decrementProduct, errors } =
+    useProduct();
+
+  const onIncrement = (id) => {
+    incrementProduct(id);
+  };
+  const onDecrement = (id) => {
+    decrementProduct(id);
+  };
+
+  const handleError = async (errors) => {
+    if (errors) {
+      await errors.forEach((error) => {
+        toast.error("Ops! Algo ha ido Mal!", {
+          description: `${error.msg}`,
+          position: "top-center",
+        });
+      });
+      setHideError(true);
+      setTimeout(() => {
+        setHideError(false);
+      }, 3000);
+    }
+  };
+
   useEffect(() => {
     listProducts();
-  }, []);
+    handleError();
+  }, [errors]);
   return (
     <div className="relative flex">
       <div className="flex-wrap w-1/2">
         <h1 className="text-2xl text-center font-bold uppercase mt-2">
           Lista De Productos
         </h1>
-        <div className="grid grid-cols-3 w-full mt-2">
+        <div className="grid grid-cols-3 w-full mt-2 ">
           {products.map((product, index) => (
             <div
               key={index}
@@ -42,15 +75,30 @@ const HomePage = () => {
                 {product.cantidad !== 0 ? (
                   <div>
                     {" "}
-                    <button className="text-white mx-2 border bg-green-600 rounded text-center font-semibold px-2 py-2 hover:bg-green-700">
+                    <button
+                      onClick={() => {
+                        onIncrement(product.id);
+                      }}
+                      className="text-white mx-2 border bg-green-600 rounded text-center font-semibold px-2 py-2 hover:bg-green-700"
+                    >
                       Incrementar
                     </button>
-                    <button className="text-white mx-2 border bg-red-600 rounded text-center font-semibold px-2 py-2 hover:bg-red-700">
+                    <button
+                      onClick={() => {
+                        onDecrement(product.id);
+                      }}
+                      className="text-white mx-2 border bg-red-600 rounded text-center font-semibold px-2 py-2 hover:bg-red-700"
+                    >
                       Disminuir
                     </button>
                   </div>
                 ) : (
-                  <button className="mx-2 border bg-green-500 rounded text-center font-semibold px-2 py-2 hover:bg-green-800">
+                  <button
+                    onClick={() => {
+                      onIncrement(product.id);
+                    }}
+                    className="mx-2 border bg-green-500 rounded text-center font-semibold px-2 py-2 hover:bg-green-800"
+                  >
                     Incrementar
                   </button>
                 )}
@@ -74,8 +122,43 @@ const HomePage = () => {
           ))}
         </div>
       </div>
-      <div className="w-1/2 bg-slate-500">
-        <div className="border-blue-600 dark:border">cuadro</div>
+      <div className="w-1/2 mt-4 mx-4 h-full">
+        <div className="border border-gray-600 rounded-lg shadow-lg shadow-black bg-gray-300">
+          <h1 className="text-black font-bold text-2xl mx-2">
+            Total de Productos:
+          </h1>
+          <h1 className="text-black font-bold text-2xl mx-2">
+            Total de Ventas:
+          </h1>
+          <h1 className="text-black font-bold text-2xl mx-2">
+            Total de Clientes:
+          </h1>
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart
+              width={500}
+              height={400}
+              data={products.map((product) => ({
+                cantidad: product.cantidad,
+                fecha: new Date(product.createdAt),
+              }))}
+              margin={{ top: 0, right: 10, left: 0, bottom: 0 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="fecha" />
+              <YAxis dataKey="cantidad" />
+              <Area
+                type="monotone"
+                dataKey="cantidad"
+                stroke="#8884d8"
+                fill="#8884d8"
+              />
+              <Tooltip />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="mt-4">
+          
+        </div>
       </div>
     </div>
   );
