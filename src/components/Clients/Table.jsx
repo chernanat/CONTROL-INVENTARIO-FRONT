@@ -17,7 +17,7 @@ const Table = ({ clients, deleteClient, listClient, errors, setCancel }) => {
           <tr>
             <th className="px-2 py-3">Nombre Cliente</th>
             <th className="px-2 py-3">Apellido Cliente</th>
-            <th className="px-2 py-3">Actions</th>
+            <th className="px-2 py-3 text">Actions</th>
           </tr>
         </thead>
         <tbody className="odd:bg-white odd:dark:bg-gray-900 even:dark:bg-gray-800 border-b dark:border-gray-800">

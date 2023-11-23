@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useProduct } from "../context/ProductContext";
+import { useClient } from "../context/ClientContext";
+import { useSale } from "../context/SaleContext";
 import reactImage from "../assets/react.svg";
 import {
   Area,
@@ -14,6 +16,22 @@ import {
 const HomePage = () => {
   const { products, listProducts, incrementProduct, decrementProduct, errors } =
     useProduct();
+
+  const { clients, listClients } = useClient();
+
+  const { listSalesAssociations, saleproductclient } = useSale();
+
+  const totalProducts = products.reduce(
+    (acumulador, product) => acumulador + product.cantidad,
+    0
+  );
+
+  const totalEarns = saleproductclient.reduce(
+    (acumulador, sale) => acumulador + sale.cantidad * sale.producto.precio,
+    0
+  );
+
+  const totalClients = clients.length;
 
   const onIncrement = (id) => {
     incrementProduct(id);
@@ -39,7 +57,9 @@ const HomePage = () => {
 
   useEffect(() => {
     listProducts();
+    listClients();
     handleError();
+    listSalesAssociations();
   }, [errors]);
   return (
     <div className="relative flex">
@@ -122,18 +142,27 @@ const HomePage = () => {
           ))}
         </div>
       </div>
-      <div className="w-1/2 mt-4 mx-4 h-full">
+      <div className="w-1/2 mt-4 mx-4">
         <div className="border border-gray-600 rounded-lg shadow-lg shadow-black bg-gray-300">
           <h1 className="text-black font-bold text-2xl mx-2">
-            Total de Productos:
+            Total de Productos: {totalProducts}
           </h1>
-          <h1 className="text-black font-bold text-2xl mx-2">
+          {/* <h1 className="text-black font-bold text-2xl mx-2">
             Total de Ventas:
+          </h1> */}
+          <h1 className="text-black font-bold text-2xl mx-2">
+            Total de Clientes: {totalClients}
           </h1>
           <h1 className="text-black font-bold text-2xl mx-2">
-            Total de Clientes:
+            Total de Ganancias:{" "}
+            {Intl.NumberFormat("es-CO", {
+              style: "currency",
+              currency: "COP",
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            }).format(totalEarns)}
           </h1>
-          <ResponsiveContainer width="100%" height="100%">
+          {/* <ResponsiveContainer width="100%" height="100%">
             <AreaChart
               width={500}
               height={400}
@@ -154,11 +183,9 @@ const HomePage = () => {
               />
               <Tooltip />
             </AreaChart>
-          </ResponsiveContainer>
+          </ResponsiveContainer> */}
         </div>
-        <div className="mt-4">
-          
-        </div>
+        <div className="mt-4"></div>
       </div>
     </div>
   );
