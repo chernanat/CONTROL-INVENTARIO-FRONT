@@ -82,7 +82,7 @@ export const SalePage = () => {
     <div className="container mx-auto flex flex-col items-center">
       <h1 className="text-4xl p-2 font-bold text-center">Pagina de Ventas</h1>
       <div>
-        {!cancel && !historial && (
+        {/* {!cancel && !historial && (
           <form
             onSubmit={onSubmit}
             className="bg-gray-100 shadow-md rounded px-4 py-4 mb-6 max-w-md mx-auto"
@@ -149,80 +149,10 @@ export const SalePage = () => {
               </div>
             )}
           </form>
-        )}
+        )} */}
       </div>
-      <div className="flex flex-col lg:flex-row items-center w-full">
-        <div className="lg:w-1/2 flex-shrink-0">
-          {!cancel && historial && (
-            <form
-              onSubmit={onSubmit}
-              className="bg-gray-100 shadow-md rounded px-4 py-4 mb-6 max-w-md mx-auto"
-            >
-              {clients.length === 0 || products.length === 0 ? (
-                <div role="alert">
-                  <div className="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                    Advertencia
-                  </div>
-                  <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-                    <p>Debe Crear un Cliente y Un Producto Primero.</p>
-                  </div>
-                </div>
-              ) : (
-                <div className="m-6">
-                  <h1 className="text-black font-bold text-3xl">Crear Venta</h1>
-                  <div className="mt-5 py-2 p-2">
-                    <label className="block font-bold text-black text-2xl">
-                      Selecciona el Cliente:
-                    </label>
-                    <select
-                      {...register("cliente_id")}
-                      name="cliente_id"
-                      className="mt-2 rounded w-full border py-2"
-                    >
-                      {clients.map((client) => (
-                        <option className="" value={client.id} key={client.id}>
-                          {client.nombre} {client.apellido}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="py-2 p-2">
-                    <label className="block font-bold text-black text-2xl">
-                      Selecciona El Producto:
-                    </label>
-                    <select
-                      {...register("producto_id")}
-                      name="producto_id"
-                      className="mt-2 rounded w-full border py-2"
-                    >
-                      {products.map((product) => (
-                        <option value={product.id} key={product.id}>
-                          {product.nombre}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="py-2 p-2 mb-6">
-                    <label className="block font-bold text-black text-2xl">
-                      Ingresa La cantidad:
-                    </label>
-                    <input
-                      {...register("cantidad", { required: false })}
-                      type="number"
-                      className="mt-2 rounded w-full bg-gray-200 border py-1"
-                    />
-                  </div>
-                  <div className="flex justify-center">
-                    <button className="rounded bg-green-600 font-bold py-2 px-4 text-white hover:bg-green-700">
-                      Crear Venta!
-                    </button>
-                  </div>
-                </div>
-              )}
-            </form>
-          )}
-        </div>
-        <div className="lg:w-1/2">
+      <div className="flex items-center justify-center w-full">
+        <div className="">
           {historial && (
             <TableHistorial saleclient={saleclient}></TableHistorial>
           )}
@@ -250,6 +180,7 @@ export const SalePage = () => {
           </div>
         )}
       </div>
+
       <Toaster expand={true} richColors></Toaster>
       <Table
         sales={sales}

@@ -36,6 +36,7 @@ export const ProductContextProvider = ({ children }) => {
       setSucess(true);
     } catch (error) {
       if (error.response.data.errors) {
+        console.log('primera');
         setErrors(error.response.data.errors);
         setTimeout(() => {
           setErrors([]);
@@ -44,6 +45,7 @@ export const ProductContextProvider = ({ children }) => {
         Array.isArray(error.response.data) &&
         error.response.data.length > 0
       ) {
+        console.log('seugnd');
         setErrors([error.response.data]);
         setTimeout(() => {
           setErrors([]);

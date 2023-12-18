@@ -7,7 +7,7 @@ const TableHistorial = ({ saleclient }) => {
   );
 
   return (
-    <div className="relative overflow-x-auto rounded-md">
+    <div className="relative overflow-x-auto rounded-md mt-4">
       <h1 className="text-black text-3xl font-bold flex justify-center">
         Historial de {saleclient[0]?.cliente.nombre}
       </h1>
@@ -33,7 +33,7 @@ const TableHistorial = ({ saleclient }) => {
                   maximumFractionDigits: 0,
                 }).format(sale.producto.precio)}
               </td>
-              <td className="px-6 py-4">{sale.cantidad}</td>
+              <td className="px-6 py-4 text-center">{sale.cantidad}</td>
               <td className="px-6 py-4">
                 {Intl.NumberFormat("es-CO", {
                   style: "currency",

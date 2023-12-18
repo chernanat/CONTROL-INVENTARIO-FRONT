@@ -43,7 +43,7 @@ const FormUpdate = ({ onUpdateSubmit, onCancel, register }) => {
             className="rounded bg-orange-600 px-2 py-2 hover:bg-orange-700 text-white font-bold"
             onClick={onCancel}
           >
-            Cancel
+            Cancelar
           </button>
         </div>
       </form>
