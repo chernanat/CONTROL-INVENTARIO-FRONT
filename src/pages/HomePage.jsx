@@ -97,7 +97,7 @@ const HomePage = () => {
     <div className="relative flex">
       <div className="flex-wrap bg-slate-100 mx-2 mt-3 px-2 rounded-xl shadow-slate-700 shadow-xl">
         <h1 className="text-2xl text-center font-bold uppercase mt-2">
-          Lista De Productos tet
+          Lista De Productos
         </h1>
         <div className="grid grid-cols-4 w-full mt-2">
           {products.map((product, index) => (
@@ -201,8 +201,8 @@ const HomePage = () => {
         <ResponsiveContainer width="100%" height="50%">
           <AreaChart
             data={sales.map((sale) => ({
-              cantidad: (sale.cantidad),
-              fecha: new Date(sale.createdAt).toLocaleString('es-US'), // Mantener el formato original de la fecha
+              cantidad: sale.cantidad,
+              fecha: new Date(sale.createdAt).toLocaleString("es-US"), // Mantener el formato original de la fecha
             }))}
             margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
           >
@@ -218,8 +218,7 @@ const HomePage = () => {
               stroke="#8884d8"
               fill="#8884d8"
             />
-            <Tooltip
-            />
+            <Tooltip />
           </AreaChart>
         </ResponsiveContainer>
         <div className="mt-2">
