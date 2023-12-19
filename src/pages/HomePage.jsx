@@ -97,7 +97,7 @@ const HomePage = () => {
     <div className="relative flex">
       <div className="flex-wrap bg-slate-100 mx-2 mt-3 px-2 rounded-xl shadow-slate-700 shadow-xl">
         <h1 className="text-2xl text-center font-bold uppercase mt-2">
-          Lista De Productos
+          Lista De Productos tet
         </h1>
         <div className="grid grid-cols-4 w-full mt-2">
           {products.map((product, index) => (
