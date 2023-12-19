@@ -9,7 +9,6 @@ import {
   updateSale,
   createBulk,
 } from "../services/sale";
-import { data } from "autoprefixer";
 
 const SaleContext = createContext();
 
