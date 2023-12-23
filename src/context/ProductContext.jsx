@@ -29,6 +29,8 @@ export const ProductContextProvider = ({ children }) => {
 
   const registerProduct = async (product) => {
     try {
+      console.log(product);
+      console.log(product.imagen[0])
       const newproduct = await productRequest(product);
       console.log(newproduct.data);
       setProduct(newproduct.data);

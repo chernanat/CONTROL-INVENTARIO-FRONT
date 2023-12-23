@@ -24,6 +24,7 @@ export const ProductPage = () => {
   const [cancel, setCancel] = useState(false);
 
   const onSubmit = handleSubmit((values) => {
+    console.log(values);
     registerProduct(values);
   });
 
@@ -65,6 +66,7 @@ export const ProductPage = () => {
     setValue("nombre", product.nombre);
     setValue("cantidad", product.cantidad);
     setValue("precio", product.precio);
+    setValue("imagen", product.imagen);
   }, [product, errors]);
   return (
     <div className="container mx-auto flex justify-center items-center flex-col">

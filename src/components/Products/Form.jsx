@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import ImageUploader from "./ImageUploader";
 
-const Form = ({onSubmit, register}) => {
+const Form = ({ onSubmit, register }) => {
   return (
     <>
       <form
@@ -50,6 +51,7 @@ const Form = ({onSubmit, register}) => {
             {...register("precio", { required: false })}
           />
         </div>
+        <ImageUploader register={register}></ImageUploader>
         <div className="flex justify-center">
           <button className="rounded bg-green-600 font-bold py-2 px-4 text-white hover:bg-green-700">
             Guardar!
